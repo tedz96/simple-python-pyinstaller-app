@@ -18,6 +18,10 @@ node {
         docker.image('python:3.9').inside('-u root') {
            sh 'pip install pyinstaller'
            sh 'pyinstaller --onefile sources/add2vals.py'
+           sh 'apt update && apt install openssh-client -y'
+           withCredentials([sshUserPrivateKey(credentialsId: 'ssh-key', keyFileVariable: 'SSH_KEY')]) {
+            sh 'scp -i $SSH_KEY dist/add2vals ubuntu@13.229.251.156:/home/ubuntu'
+           }
         }
     }
 }
