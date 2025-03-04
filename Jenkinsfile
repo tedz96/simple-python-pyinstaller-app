@@ -15,7 +15,7 @@ node {
         input message: 'Lanjutkan ke tahap Deploy?'
     }
     stage ('Deploy'){
-        docker.image('pyhton:3.9').inside('-u root') {
+        docker.image('python:3.9').inside('-u root') {
            sh 'pip install pyinstaller'
            sh 'pyinstaller --onefile sources/add2vals.py'
         }
