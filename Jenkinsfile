@@ -20,7 +20,7 @@ node {
            sh 'pyinstaller --onefile sources/add2vals.py'
            sh 'apt update && apt install openssh-client -y'
            withCredentials([sshUserPrivateKey(credentialsId: 'ssh-key', keyFileVariable: 'SSH_KEY')]) {
-            sh 'scp -i $SSH_KEY dist/add2vals ubuntu@13.229.251.156:/home/ubuntu'
+            sh 'scp -o StrictHostKeyChecking=no -i $SSH_KEY dist/add2vals ubuntu@18.139.208.22:/home/ubuntu'
            }
         }
     }
